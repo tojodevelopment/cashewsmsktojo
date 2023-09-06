@@ -2,34 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Management</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Product Management and Google Drive Integration</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://apis.google.com/js/api.js"></script>
   </head>
   <body>
-    <h1>Product Management</h1>
+    <h1>Product Management and Google Drive Integration</h1>
 
-    <!-- Form to Add and Edit Products -->
-    <form id="productForm" enctype="multipart/form-data">
-      <label for="productName">Product Name:</label>
-      <input type="text" id="productName" required />
-      <label for="productPrice">Product Price:</label>
-      <input type="number" id="productPrice" required />
-      <label for="productImage">Product Image:</label>
-      <input type="file" id="productImage" accept="image/*" required />
-      <button type="submit" id="addButton">Add Product</button>
-      <button type="button" id="updateButton" style="display: none">
-        Update Product
-      </button>
-      <input type="hidden" id="editIndex" value="-1" />
-    </form>
+    <!-- Product Management Form and Table -->
+    <div>
+      <!-- Form to Add and Edit Products -->
+      <form id="productForm" enctype="multipart/form-data">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" required />
+        <label for="productPrice">Product Price:</label>
+        <input type="number" id="productPrice" required />
+        <label for="productImage">Product Image:</label>
+        <input
+          type="file"
+          id="productImage"
+          accept="image/*"
+          required
+        />
+        <button
+          type="submit"
+          id="addButton"
+        >
+          Add Product
+        </button>
+        <button
+          type="button"
+          id="updateButton"
+          style="display: none"
+        >
+          Update Product
+        </button>
+        <input
+          type="hidden"
+          id="editIndex"
+          value="-1"
+        />
+      </form>
 
-    <!-- Table to Display Products -->
-    <table>
-      <!-- <thead>
+      <!-- Table to Display Products -->
+      <table>
+        <!-- <thead>
         <tr>
           <th>Name</th>
           <th>Price</th>
@@ -37,190 +61,123 @@
           <th>Action</th>
         </tr>
       </thead> -->
-      <tbody id="productList">
-        <!-- Products will be displayed here -->
-      </tbody>
-    </table>
+        <tbody id="productList">
+          <!-- Products will be displayed here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Google Drive Integration -->
+    <div>
+      <button
+        id="authorizeButton"
+        style="display: none;"
+      >
+        Authorize with Google
+      </button>
+
+      <div id="fileList">
+        <!-- File list will be displayed here -->
+      </div>
+    </div>
 
     <script>
-      const productForm = document.getElementById("productForm");
-      const productList = document.getElementById("productList");
-      const addButton = document.getElementById("addButton");
-      const updateButton = document.getElementById("updateButton");
-      const editIndex = document.getElementById("editIndex");
+      // Your Google Drive API code and functions go here
 
-      let products = [];
+      // Define your Google Drive API client ID and API key here
+      const CLIENT_ID = '1116162941-9nerqtn3dqfg5m2ulc94dvhaa4u8knu8.apps.googleusercontent.com';
+      const API_KEY = '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';
 
-      // Load products from JSON file
-      function loadProducts() {
-        fetch("products.json")
-          .then((response) => response.json())
-          .then((data) => {
-            products = data;
-            displayProducts();
-          })
-          .catch((error) => console.error("Error loading products:", error));
-      }
+      // Array to store the list of files
+      let fileList = [];
 
-      // Display products in the table
-      function displayProducts() {
-        productList.innerHTML = "";
-
-        // Create a Bootstrap row
-        const row = document.createElement("div");
-        row.classList.add("row");
-        row.style.overflowX = "auto"; // Enable horizontal scrolling if necessary
-        row.style.whiteSpace = "nowrap"; // Prevent line breaks
-
-        products.forEach((product, index) => {
-          // Create a Bootstrap card column
-          const col = document.createElement("div");
-          col.classList.add("col-md-3", "p-3"); // Set the column width to col-md-3
-          col.style.display = "inline-block"; // Display columns in a single row
-
-          // Create the card
-          const card = document.createElement("div");
-          card.classList.add("card");
-
-          // Set a fixed height for the card
-          card.style.height = "400px"; // Adjust the height as needed
-
-          // Card body
-          const cardBody = document.createElement("div");
-          cardBody.classList.add("card-body");
-
-          // Product name
-          const productName = document.createElement("h5");
-          productName.classList.add("card-title");
-          productName.textContent = product.name;
-
-          // Product price
-          const productPrice = document.createElement("p");
-          productPrice.classList.add("card-text");
-          productPrice.textContent = `Price: $${product.price}`;
-
-          // Product image
-          const productImageDiv = document.createElement("div");
-          productImageDiv.classList.add("card-img-container");
-
-          // Set a fixed height for the image div
-          productImageDiv.style.maxHeight = "200px"; // Adjust the height as needed
-
-          const productImage = document.createElement("img");
-          productImage.src = product.image;
-          productImage.alt = "Product Image";
-          productImage.classList.add("card-img-top");
-
-          productImageDiv.appendChild(productImage); // Add the image to the container div
-
-          // Buttons for Edit and Delete
-          const buttonDiv = document.createElement("div");
-          buttonDiv.classList.add("text-center");
-
-          const editButton = document.createElement("button");
-          editButton.classList.add("btn", "btn-primary", "mx-2");
-          editButton.textContent = "Edit";
-          editButton.onclick = () => editProduct(index);
-
-          const deleteButton = document.createElement("button");
-          deleteButton.classList.add("btn", "btn-danger", "mx-2");
-          deleteButton.textContent = "Delete";
-          deleteButton.onclick = () => deleteProduct(index);
-
-          // Append elements to the card
-          buttonDiv.appendChild(editButton);
-          buttonDiv.appendChild(deleteButton);
-
-          cardBody.appendChild(productName);
-          cardBody.appendChild(productPrice);
-          cardBody.appendChild(buttonDiv);
-
-          card.appendChild(productImageDiv); // Add the image container to the card
-          card.appendChild(cardBody);
-
-          // Append the card to the column
-          col.appendChild(card);
-
-          // Append the column to the row
-          row.appendChild(col);
+      // Load the API client and authenticate the user
+      gapi.load('client:auth2', () => {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          scope: 'https://www.googleapis.com/auth/drive.file',
         });
 
-        // Append the row to the productList
-        productList.appendChild(row);
-      }
+        // Listen for sign-in state changes
+        gapi.auth2
+          .getAuthInstance()
+          .isSignedIn.listen(updateSigninStatus);
 
-      // Add a new product or update an existing one
-      function addOrUpdateProduct(name, price, image) {
-        const index = editIndex.value;
-        if (index === "-1") {
-          // Add new product
-          const newProduct = { name, price, image, updated: false }; // Add 'updated' flag
-          products.push(newProduct);
-        } else {
-          // Update existing product if not already updated
-          if (!products[index].updated) {
-            products[index].name = name;
-            products[index].price = price;
-            products[index].image = image;
-            products[index].updated = true; // Set 'updated' flag
-            editIndex.value = "-1"; // Reset the editIndex
-          }
-        }
-        saveProducts();
-        displayProducts();
-        addButton.style.display = "block";
-        updateButton.style.display = "none";
-        productForm.reset();
-      }
-
-      // Edit a product
-      function editProduct(index) {
-        const product = products[index];
-        if (!product.updated) {
-          document.getElementById("productName").value = product.name;
-          document.getElementById("productPrice").value = product.price;
-          editIndex.value = index;
-          addButton.style.display = "none";
-          updateButton.style.display = "block";
-        }
-      }
-
-      // Delete a product
-      function deleteProduct(index) {
-        products.splice(index, 1);
-        saveProducts();
-        displayProducts();
-      }
-
-      // Save products to JSON file
-      function saveProducts() {
-        fetch("products.json", {
-          method: "PUT",
-          body: JSON.stringify(products),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }).catch((error) => console.error("Error saving products:", error));
-      }
-
-      // Handle form submission
-      productForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const productName = document.getElementById("productName").value;
-        const productPrice = parseFloat(
-          document.getElementById("productPrice").value
+        // Handle authorization
+        const authorizeButton = document.getElementById(
+          'authorizeButton'
         );
-        const productImage = document.getElementById("productImage").files[0];
-        const reader = new FileReader();
-        reader.onload = function () {
-          addOrUpdateProduct(productName, productPrice, reader.result);
-        };
-        if (productImage) {
-          reader.readAsDataURL(productImage);
-        } else {
-          alert("Please select an image.");
-        }
+        authorizeButton.style.display = 'block';
+        authorizeButton.onclick = handleAuthClick;
+
+        // Load the Google Drive API client library
+        gapi.client.load('drive', 'v3', () => {
+          // Once the client library is loaded, check the sign-in status
+          updateSigninStatus(
+            gapi.auth2.getAuthInstance().isSignedIn.get()
+          );
+        });
       });
+
+      // Update the UI based on the user's sign-in status
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          listFiles();
+        } else {
+          authorizeButton.style.display = 'block';
+        }
+      }
+
+      // Handle sign-in
+      function handleAuthClick() {
+        gapi.auth2.getAuthInstance().signIn();
+      }
+
+      // Handle sign-out
+      function handleSignoutClick() {
+        gapi.auth2.getAuthInstance().signOut();
+      }
+
+      // List files in Google Drive
+      function listFiles() {
+        gapi.client.drive.files
+          .list({
+            pageSize: 10,
+            fields: 'nextPageToken, files(id, name)',
+          })
+          .then((response) => {
+            fileList = response.result.files;
+            displayFileList();
+          });
+      }
+
+      // Display the list of files
+      function displayFileList() {
+        const fileListContainer = document.getElementById(
+          'fileList'
+        );
+        fileListContainer.innerHTML = '';
+
+        if (fileList.length === 0) {
+          fileListContainer.innerHTML = '<p>No files found.</p>';
+          return;
+        }
+
+        const ul = document.createElement('ul');
+        fileList.forEach((file) => {
+          const li = document.createElement('li');
+          li.textContent = file.name;
+          ul.appendChild(li);
+        });
+
+        fileListContainer.appendChild(ul);
+      }
+
+      // Your product management code and functions go here
+
+      // ...
 
       // Initial load of products
       loadProducts();
