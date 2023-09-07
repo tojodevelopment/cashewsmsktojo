@@ -2,185 +2,215 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>Product Management and Google Drive Integration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cashew Panruti | MSK Cashew</title>
+    <!-- Include Bootstrap CSS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
-    <script src="https://apis.google.com/js/api.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      /* Custom CSS for controlling scrolling speed */
+      /* .custom-marquee {
+        animation: marquee 10s linear infinite;
+      } */
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+    </style>
   </head>
-  <body>
-    <h1>Product Management and Google Drive Integration</h1>
+  <body class="d-flex flex-column min-vh-100" style="overflow-x: hidden  background-color: rgb(232, 230, 220);">
+    
+   
 
-    <!-- Product Management Form and Table -->
-    <div>
-      <!-- Form to Add and Edit Products -->
-      <form id="productForm" enctype="multipart/form-data">
-        <label for="productName">Product Name:</label>
-        <input type="text" id="productName" required />
-        <label for="productPrice">Product Price:</label>
-        <input type="number" id="productPrice" required />
-        <label for="productImage">Product Image:</label>
-        <input
-          type="file"
-          id="productImage"
-          accept="image/*"
-          required
-        />
-        <button
-          type="submit"
-          id="addButton"
+<img src="frontimage.png" alt="Image Description" class="img-fluid">
+
+  
+
+
+   
+
+    <div class="p-5" style="min-height: 20rem ;  background-image: url('bg.png');">
+      <div class="row">
+        <!-- Left Div with Tab Buttons -->
+        <div
+          class="col-sm-3 d-flex flex-column justify-content-center align-items-center"
+          id="leftDiv"
         >
-          Add Product
-        </button>
-        <button
-          type="button"
-          id="updateButton"
-          style="display: none"
-        >
-          Update Product
-        </button>
-        <input
-          type="hidden"
-          id="editIndex"
-          value="-1"
-        />
-      </form>
-
-      <!-- Table to Display Products -->
-      <table>
-        <!-- <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Image</th>
-          <th>Action</th>
-        </tr>
-      </thead> -->
-        <tbody id="productList">
-          <!-- Products will be displayed here -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Google Drive Integration -->
-    <div>
-      <button
-        id="authorizeButton"
-        style="display: none;"
-      >
-        Authorize with Google
-      </button>
-
-      <div id="fileList">
-        <!-- File list will be displayed here -->
+          <ul class="nav flex-column">
+            <!-- Buttons will be created dynamically after JSON data is loaded -->
+          </ul>
+        </div>
+        <!-- Right Div to Display Company Details -->
+        <div class="col-md-9" id="rightDiv">
+          <!-- Data will be displayed here -->
+        </div>
       </div>
     </div>
 
+    <div class="container-fluid" style=" background-image: url('bg.png');">
+      <div class="row">
+        <div class="col-sm-12">
+          <marquee behavior="scroll" direction="left" class="custom-marquee">
+            <h3 style="color: #008000">
+              <i class="fas fa-truck" style="transform: scaleX(-1)"></i>
+              Free Shipping on Orders Above ₹3999
+            </h3>
+          </marquee>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="mb-0 px-5" style="background-image: url('bg.png'); margin-bottom: 0;">Products</h1>
+    <div class="p-5 flex-grow-1" style=" background-image: url('bg.png');">
+      <div class="row" id="productList" style=" background-image: url('bg.png');">
+        <!-- Products will be added here -->
+      </div>
+    </div>
+
+    <footer class="bg-dark text-light "  >
+      <div class="container-fluid">
+        <div class="row d-flex align-items-center">
+          <div class="col-md-6">
+            <p class="text-left">&copy; 2023 MSK Cashew - Panruti</p>
+          </div>
+          <div class="col-md-6">
+            <p class="text-right">
+              Follow Us: <a href="#">Facebook</a> |
+              <a href="https://www.instagram.com/aravindan_muthukumaran"
+                >Twitter</a
+              >
+              | <a href="#">Instagram</a> |
+              <a href="https://api.whatsapp.com/send?phone=8270612215&text=Hi"
+                >WhatsApp</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script>
-      // Your Google Drive API code and functions go here
+      // Fetch data from the JSON file
+      fetch("productlist.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const productList = document.getElementById("productList");
+          const products = data.products; // Access the "products" array from the JSON data
 
-      // Define your Google Drive API client ID and API key here
-      const CLIENT_ID = '1116162941-9nerqtn3dqfg5m2ulc94dvhaa4u8knu8.apps.googleusercontent.com';
-      const API_KEY = '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';
+          // Loop through the products array and generate HTML elements for each product
+          products.forEach((product) => {
+            const productDiv = document.createElement("div");
+            productDiv.className = "col-md-4 mb-4";
 
-      // Array to store the list of files
-      let fileList = [];
+            // Add Bootstrap classes and custom styling to the product card
+            productDiv.innerHTML = `
+                        <div class="card h-100">
+                            <h5 class="card-title px-3 py-2">${
+                              product.productname
+                            }</h5>
+                            <img src="${product.imageSrc}" alt="${
+              product.productname
+            }" class="card-img-top" style="max-height: 200px; object-fit: contain;">
+                            <div class="card-body">
+                                <p class="card-text">${product.description}</p>
+                                <div class="d-flex justify-content-between">
+                                    <p class="card-text">Price: ₹${
+                                      product.price
+                                    }</p>
+                                    <p class="card-text">Discount Price: ₹${
+                                      product.discountprice
+                                    }</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="https://api.whatsapp.com/send?phone=8270612215&text=Hi%20there!%20I%20want%20to%20buy%20the%20product:%20${encodeURIComponent(
+                                  product.productname
+                                )}%20Price:%20₹${
+              product.price
+            }" target="_blank" class="btn btn-primary">Buy Now</a>
+                            </div>
+                        </div>
+                    `;
 
-      // Load the API client and authenticate the user
-      gapi.load('client:auth2', () => {
-        gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          scope: 'https://www.googleapis.com/auth/drive.file',
-        });
-
-        // Listen for sign-in state changes
-        gapi.auth2
-          .getAuthInstance()
-          .isSignedIn.listen(updateSigninStatus);
-
-        // Handle authorization
-        const authorizeButton = document.getElementById(
-          'authorizeButton'
-        );
-        authorizeButton.style.display = 'block';
-        authorizeButton.onclick = handleAuthClick;
-
-        // Load the Google Drive API client library
-        gapi.client.load('drive', 'v3', () => {
-          // Once the client library is loaded, check the sign-in status
-          updateSigninStatus(
-            gapi.auth2.getAuthInstance().isSignedIn.get()
-          );
-        });
-      });
-
-      // Update the UI based on the user's sign-in status
-      function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          authorizeButton.style.display = 'none';
-          listFiles();
-        } else {
-          authorizeButton.style.display = 'block';
-        }
-      }
-
-      // Handle sign-in
-      function handleAuthClick() {
-        gapi.auth2.getAuthInstance().signIn();
-      }
-
-      // Handle sign-out
-      function handleSignoutClick() {
-        gapi.auth2.getAuthInstance().signOut();
-      }
-
-      // List files in Google Drive
-      function listFiles() {
-        gapi.client.drive.files
-          .list({
-            pageSize: 10,
-            fields: 'nextPageToken, files(id, name)',
-          })
-          .then((response) => {
-            fileList = response.result.files;
-            displayFileList();
+            // Append the product card to the productList container
+            productList.appendChild(productDiv);
           });
-      }
-
-      // Display the list of files
-      function displayFileList() {
-        const fileListContainer = document.getElementById(
-          'fileList'
-        );
-        fileListContainer.innerHTML = '';
-
-        if (fileList.length === 0) {
-          fileListContainer.innerHTML = '<p>No files found.</p>';
-          return;
-        }
-
-        const ul = document.createElement('ul');
-        fileList.forEach((file) => {
-          const li = document.createElement('li');
-          li.textContent = file.name;
-          ul.appendChild(li);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
         });
 
-        fileListContainer.appendChild(ul);
+      function updateRightDiv(tab, jsonData) {
+        const companyDetails = jsonData.companydetail.find(
+          (item) => item.Tab === tab
+        );
+        if (companyDetails) {
+          // Display company details in the right div
+          const html = `
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="mb-3">${companyDetails.Title}</h3>
+                                <p class="mb-3">${companyDetails.Date}</p>
+                                <p class="mb-3">${companyDetails.Description}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+          document.getElementById("rightDiv").innerHTML = html;
+        } else {
+          // Handle the case where company details are not found
+          document.getElementById("rightDiv").innerHTML =
+            "<p>Company details not found.</p>";
+        }
       }
 
-      // Your product management code and functions go here
+      // Load JSON data from an external file
+      fetch("productlist.json")
+        .then((response) => response.json())
+        .then((jsonData) => {
+          // Create tab buttons dynamically based on JSON data
+          const leftDiv = document.getElementById("leftDiv");
+          const tabList = document.createElement("ul");
+          tabList.className = "nav flex-column";
+          jsonData.companydetail.forEach((item) => {
+            const tabButton = document.createElement("button");
+            tabButton.className = "btn btn-link";
+            tabButton.dataset.tab = item.Tab;
+            tabButton.textContent = item.Tab;
+            tabButton.addEventListener("click", () => {
+              updateRightDiv(item.Tab, jsonData);
+            });
+            const listItem = document.createElement("li");
+            listItem.className = "nav-item";
+            listItem.appendChild(tabButton);
+            tabList.appendChild(listItem);
+          });
+          leftDiv.appendChild(tabList);
 
-      // ...
-
-      // Initial load of products
-      loadProducts();
+          // Load default tab on page load
+          updateRightDiv(jsonData.companydetail[0].Tab, jsonData);
+        })
+        .catch((error) => {
+          console.error("Error loading JSON data:", error);
+        });
     </script>
+
+    <!-- Include Bootstrap JS and Popper.js for Bootstrap components (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
