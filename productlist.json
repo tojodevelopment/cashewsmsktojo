@@ -1,0 +1,70 @@
+{
+    "products": [
+      {
+        "productname": "Product 1",
+        "price": 50,
+        "discountprice": 20,
+        "description": "Quality product",
+        "imageSrc": "images.jpg"
+      },
+      {
+        "productname": "Product 2",
+        "price": 60,
+        "discountprice": 25,
+        "description": "Another quality product",
+        "imageSrc": "images.jpg"
+      },
+      {
+        "productname": "Product 3",
+        "price": 70,
+        "discountprice": 30,
+        "description": "Yet another quality product",
+        "imageSrc": "images.jpg"
+      },
+      {
+        "productname": "Product 4",
+        "price": 80,
+        "discountprice": 35,
+        "description": "Yet another quality product",
+        "imageSrc": "images.jpg"
+      },
+      {
+        "productname": "Product 5",
+        "price": 90,
+        "discountprice": 40,
+        "description": "Yet another quality product",
+        "imageSrc": "images.jpg"
+      }
+    ],
+    "companydetail": [
+      {
+        "Tab": "About",
+        "Title": "Msk Cashews",
+        "Date": "    MSK Cashew is a leading provider of high-quality cashew nuts sourced from the finest cashew farms from Panruti. We take pride in delivering premium cashew products to our customers.",
+        "imgs": "images.jpg",
+        "Description": [
+          " Our commitment to quality, sustainability, and customer satisfaction sets us apart. We work closely with local farmers and ensure fair trade practices."
+        ]
+      },
+      {
+        "Tab": "BCM",
+        "Title": "Frontend developer",
+        "Date": "October 2020 - February 2022",
+        "imgs": "assets/images/school/image1.png",
+        "Description": [
+          "Collaborated with designers and back-end developers to create responsive and user-friendly web experiences."
+        ]
+      },
+      {
+        "Tab": "RETURN & REFUND POLICY",
+        "Title": "Terms and conditions:",
+        "Date": "You are permitted to return products purchased from www.happilo.com, subject to valid reasons accepted by the customer service team",
+        "imgs": "assets/images/school/image1.png",
+        "Description": [
+          "You receive a damaged, expired, faulty or defective product.","You receive a product that is different from what you ordered",
+          "Our policy lasts 7 days"
+        ]
+      }
+    ]
+  }
+  
