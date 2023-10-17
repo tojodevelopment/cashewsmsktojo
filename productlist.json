@@ -1,36 +1,84 @@
 {
     "products": [
       {
-        "productname": "Product 1",
-        "price": 50,
+        "productname": "1st quality (240)",
+        "discountpercentage":0.41,
+        "price": 900,
         "discountprice": 20,
         "description": "Quality product",
-        "imageSrc": "images.jpg"
+        "imageSrc": "240.jpeg"
       },
       {
-        "productname": "Product 2",
-        "price": 60,
+        "productname": "2nd quality (320) ",
+        "discountpercentage":0.41,
+        "price": 750,
         "discountprice": 25,
         "description": "Another quality product",
-        "imageSrc": "images.jpg"
+        "imageSrc": "320.jpeg"
       },
       {
-        "productname": "Product 3",
-        "price": 70,
+        "productname": "3rd quality (450)",
+        "discountpercentage":0.41,
+        "price": 720,
         "discountprice": 30,
         "description": "Yet another quality product",
-        "imageSrc": "images.jpg"
+        "imageSrc": "450.jpeg"
       },
       {
-        "productname": "Product 4",
-        "price": 80,
+        "productname": "SW - Rs(450 - 500)",
+        "discountpercentage":0.41,
+        "price": 670,
         "discountprice": 35,
+        "description": "Yet another quality product",
+        "imageSrc": "sw.jpeg"
+      },
+      {
+        "productname": "SSW -Rs( 300-350)",
+        "discountpercentage":0.41,
+        "price": 520,
+        "discountprice": 40,
         "description": "Yet another quality product",
         "imageSrc": "images.jpg"
       },
       {
-        "productname": "Product 5",
-        "price": 90,
+        "productname": "JH - Rs(500-600)",
+        "discountpercentage":0.41,
+        "price": 720,
+        "discountprice": 40,
+        "description": "Yet another quality product",
+        "imageSrc": "jh.jpeg"
+      },{
+        "productname": "LWP - Rs(450-500)",
+        "discountpercentage":0.41,
+        "price": 660,
+        "discountprice": 40,
+        "description": "Yet another quality product",
+        "imageSrc": "lwp.jpeg"
+      },{
+        "productname": "S - Rs(480-520)",
+        "discountpercentage":0.41,
+        "price": 700,
+        "discountprice": 40,
+        "description": "Yet another quality product",
+        "imageSrc": "images.jpg"
+      },{
+        "productname": "Sp - Rs(350-380)",
+        "discountpercentage":0.41,
+        "price": 560,
+        "discountprice": 40,
+        "description": "Yet another quality product",
+        "imageSrc": "images.jpg"
+      },{
+        "productname": "PKW - Rs(300-350)",
+        "discountpercentage":0.41,
+        "price": 525,
+        "discountprice": 40,
+        "description": "Yet another quality product",
+        "imageSrc": "images.jpg"
+      },{
+        "productname": "BUDS -  Rs(450- 500)",
+        "discountpercentage":0.41,
+        "price": 670,
         "discountprice": 40,
         "description": "Yet another quality product",
         "imageSrc": "images.jpg"

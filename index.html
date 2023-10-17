@@ -13,7 +13,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <style>
       /* Custom CSS for controlling scrolling speed */
       /* .custom-marquee {
@@ -30,18 +33,14 @@
       }
     </style>
   </head>
-  <body class="d-flex flex-column min-vh-100" style="overflow-x: hidden  background-color: rgb(232, 230, 220);">
-    
-   
+  <body
+    class="d-flex flex-column min-vh-100"
 
-<img src="frontimage.png" alt="Image Description" class="img-fluid">
+    style="overflow-x: hidden; background-color: rgb(232, 230, 220);"
+  >
+    <img src="frontimage.png" alt="Image Description" class="img-fluid" />
 
-  
-
-
-   
-
-    <div class="p-5" style="min-height: 20rem ;  background-image: url('bg.png');">
+    <div class="p-5" style="min-height: 20rem; background-image: url('bg.png')">
       <div class="row">
         <!-- Left Div with Tab Buttons -->
         <div
@@ -59,27 +58,42 @@
       </div>
     </div>
 
-    <div class="container-fluid" style=" background-image: url('bg.png');">
+    <div class="container-fluid" style="background-image: url('bg.png')">
       <div class="row">
         <div class="col-sm-12">
+          
           <marquee behavior="scroll" direction="left" class="custom-marquee">
             <h3 style="color: #008000">
+            <i class="fas fa-user-friends"></i>
+           
               <i class="fas fa-truck" style="transform: scaleX(-1)"></i>
               Free Shipping on Orders Above ₹3999
+              <i class="fas fa-truck" style="transform: scaleX(-1)"></i>
             </h3>
           </marquee>
         </div>
       </div>
     </div>
 
-    <h1 class="mb-0 px-5" style="background-image: url('bg.png'); margin-bottom: 0;">Products</h1>
-    <div class="p-5 flex-grow-1" style=" background-image: url('bg.png');">
-      <div class="row" id="productList" style=" background-image: url('bg.png');">
+    <h1
+      class="mb-0 px-5"
+      style="background-image: url('bg.png'); margin-bottom: 0"
+    >
+      Products
+    </h1>
+    
+    <div class="p-2 flex-grow-1" style="background-image: url('bg.png')">
+      <div class="row" id="productList" style="background-image: url('bg.png')">
         <!-- Products will be added here -->
       </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h6><i class="fas fa-user-friends"></i> For every referral I give ₹ 25 as a reward.</h6>
+      </div>
     </div>
+   
+    
 
-    <footer class="bg-dark text-light "  >
+    <footer class="bg-dark text-light">
       <div class="container-fluid">
         <div class="row d-flex align-items-center">
           <div class="col-md-6">
@@ -111,42 +125,29 @@
 
           // Loop through the products array and generate HTML elements for each product
           products.forEach((product) => {
-            const productDiv = document.createElement("div");
-            productDiv.className = "col-md-4 mb-4";
+  const productDiv = document.createElement("div");
+  productDiv.className = "col-6 col-md-3 mb-4"; // Use col-6 for two cards in a row on extra-small screens
 
-            // Add Bootstrap classes and custom styling to the product card
-            productDiv.innerHTML = `
-                        <div class="card h-100">
-                            <h5 class="card-title px-3 py-2">${
-                              product.productname
-                            }</h5>
-                            <img src="${product.imageSrc}" alt="${
-              product.productname
-            }" class="card-img-top" style="max-height: 200px; object-fit: contain;">
-                            <div class="card-body">
-                                <p class="card-text">${product.description}</p>
-                                <div class="d-flex justify-content-between">
-                                    <p class="card-text">Price: ₹${
-                                      product.price
-                                    }</p>
-                                    <p class="card-text">Discount Price: ₹${
-                                      product.discountprice
-                                    }</p>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <a href="https://api.whatsapp.com/send?phone=8270612215&text=Hi%20there!%20I%20want%20to%20buy%20the%20product:%20${encodeURIComponent(
-                                  product.productname
-                                )}%20Price:%20₹${
-              product.price
-            }" target="_blank" class="btn btn-primary">Buy Now</a>
-                            </div>
-                        </div>
-                    `;
+  productDiv.innerHTML = `
+    <div class="card h-100 border rounded rounded-lg">
+      <h5 class="card-title py-2 ">${product.productname}</h5>
+      <img src="${product.imageSrc}" alt="${product.productname}" class="card-img-top" style="max-height: 150px; object-fit: contain;">
+      <div class="card-body">
+        <p class="small">${product.description}</p>
+      
+          <p class="">Price: ₹${(1.70 * product.price).toFixed(2)}</p>
+          <p class="">Discount Price: ₹${((1.70 * product.price) * (1 - product.discountpercentage)).toFixed(2)}</p>
+      </div>
+      <div class="card-footer">
+        <a href="https://api.whatsapp.com/send?phone=9080539126&text=Hi%20there!%20I%20want%20to%20buy%20the%20product:%20${encodeURIComponent(product.productname)}%20Price:%20₹${product.price}" target="_blank" class="btn btn-primary btn-sm">Buy Now</a>
+      </div>
+    </div>
+  `;
 
-            // Append the product card to the productList container
-            productList.appendChild(productDiv);
-          });
+  productList.appendChild(productDiv);
+});
+
+
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
