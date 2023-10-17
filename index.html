@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cashew Panruti | MSK Cashew</title>
+    <title>CasheyCashew - Premium Cashews from Panruti</title>
+    <meta name="description" content="Explore the finest cashew products from Panruti. Free shipping on orders above ₹3999." />
+    <meta name="keywords" content="cashew, Panruti, premium cashews, cashew products" />
+
     <!-- Include Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -13,24 +16,30 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
+
     <style>
       /* Custom CSS for controlling scrolling speed */
       /* .custom-marquee {
         animation: marquee 10s linear infinite;
       } */
-
-      @keyframes marquee {
-        0% {
-          transform: translateX(100%);
-        }
-        100% {
-          transform: translateX(-100%);
-        }
+      h1 {
+        margin: 0;
+        padding: 0;
+        color: #6b3e26; /* Rich brown color */
+        font-family: 'Times New Roman', serif; /* Elegant font */
+        font-size: 36px;
       }
+      h3 {
+        color: #008000; /* Green color */
+        font-size: 20px;
+      }
+      body {
+        background-color: #f9f8ec; /* Light cream background */
+      }
+      .card {
+        background-color: #fff; /* White cards */
+      }
+      /* Add your custom styling here for a royal look */
     </style>
   </head>
   <body
@@ -38,18 +47,17 @@
 
     style="overflow-x: hidden; background-color: rgb(232, 230, 220);"
   >
-    <img src="frontimage.png" alt="Image Description" class="img-fluid" />
+    <!-- <img src="bg.png" alt="Image Description" class="img-fluid" /> -->
+    <!-- <h1 style="min-height: 20rem; background-image: url('bg.png'); text-align: center;">casheycashew</h1> -->
+    <h1 style="min-height: 10rem; background-image: url('bg.png'); text-align: center; display: flex; align-items: center; justify-content: center;">casheycashew</h1>
 
     <div class="p-5" style="min-height: 20rem; background-image: url('bg.png')">
       <div class="row">
         <!-- Left Div with Tab Buttons -->
         <div
-          class="col-sm-3 d-flex flex-column justify-content-center align-items-center"
+          class="col-sm-3 d-flex flex-row justify-content-center align-items-center"
           id="leftDiv"
         >
-          <ul class="nav flex-column">
-            <!-- Buttons will be created dynamically after JSON data is loaded -->
-          </ul>
         </div>
         <!-- Right Div to Display Company Details -->
         <div class="col-md-9" id="rightDiv">
@@ -97,7 +105,7 @@
       <div class="container-fluid">
         <div class="row d-flex align-items-center">
           <div class="col-md-6">
-            <p class="text-left">&copy; 2023 MSK Cashew - Panruti</p>
+            <p class="text-left">&copy; 2023 CasheyCashew - Panruti</p>
           </div>
           <div class="col-md-6">
             <p class="text-right">
